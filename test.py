@@ -5,15 +5,28 @@ def create_section(root, color, row, column, width, height, rowspan=1, columnspa
     section.grid(row=row, column=column, padx=1, pady=1, rowspan=rowspan, columnspan=columnspan, sticky="nsew")
     return section
 
+def populate_section(section, text):
+    label = tk.Label(section, text=text, background=section['bg'], justify="left")
+    label.pack()
+
 root = tk.Tk()
 root.title("Three Sections Example")
 
-section1 = create_section(root, "red", 0, 0, 75, 75)
-section2 = create_section(root, "green", 0, 1, 75, 75)
-sectiona = create_section(root, "red", 1, 0, 75, 75)
-sectionb = create_section(root, "green", 1, 1, 75, 75)
+noun_section = create_section(root, "white", 0, 0, 75, 75)
+verb_section = create_section(root, "white", 0, 1, 75, 75)
+adjective_section = create_section(root, "white", 1, 0, 75, 75)
+sentence_section = create_section(root, "white", 1, 1, 75, 75)
 
-section3 = create_section(root, "blue", 2, 0, 150, 50, columnspan=2)
-section4 = create_section(root, "blue", 3, 0, 150, 50, columnspan=2)
+to_translate_section = create_section(root, "light gray", 2, 0, 150, 50, columnspan=2)
+translated_section = create_section(root, "light gray", 3, 0, 150, 50, columnspan=2)
+
+noun_list = "sd das daa"
+
+populate_section(noun_section, noun_list)
+populate_section(verb_section, noun_list)
+populate_section(adjective_section, noun_list)
+populate_section(sentence_section, noun_list)
+populate_section(to_translate_section, noun_list)
+populate_section(translated_section, noun_list)
 
 root.mainloop()
