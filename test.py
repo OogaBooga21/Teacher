@@ -31,30 +31,45 @@
 
 # root.mainloop()
 
-import nltk
-from nltk.corpus import brown
-from nltk import FreqDist
+# import nltk
+# from nltk.corpus import brown
+# from nltk import FreqDist
 
-# Download the Brown Corpus data (you only need to do this once)
-nltk.download('brown')
+# # Download the Brown Corpus data (you only need to do this once)
+# nltk.download('brown')
 
-def get_common_verbs(num_verbs=1000):
-    # Get all verbs from the Brown Corpus
-    all_verbs = [word.lower() for word, pos in brown.tagged_words() if pos.startswith('VB')]
+# def get_common_verbs(num_verbs=1000):
+#     # Get all verbs from the Brown Corpus
+#     all_verbs = [word.lower() for word, pos in brown.tagged_words() if pos.startswith('VB')]
 
-    # Calculate the frequency distribution of verbs
-    verb_freq = FreqDist(all_verbs)
+#     # Calculate the frequency distribution of verbs
+#     verb_freq = FreqDist(all_verbs)
 
-    # Get the most common verbs
-    common_verbs = [verb for verb, _ in verb_freq.most_common(num_verbs)]
+#     # Get the most common verbs
+#     common_verbs = [verb for verb, _ in verb_freq.most_common(num_verbs)]
 
-    return common_verbs
+#     return common_verbs
 
-# Get common verbs
-common_verbs = get_common_verbs()
+# # Get common verbs
+# common_verbs = get_common_verbs()
 
-# Print the length of the list
-print("Length of Common Verbs List:", len(common_verbs))
+# # Print the length of the list
+# print("Length of Common Verbs List:", len(common_verbs))
 
-# Print the common verbs
-print("Common Verbs:", common_verbs)
+# # Print the common verbs
+# print("Common Verbs:", common_verbs)
+
+# from translate import Translator
+
+# def translate_text(text, target_language):
+#     translator = Translator(to_lang=target_language)
+#     translation = translator.translate(text)
+#     return translation
+
+# # Example usage
+# text_to_translate = "toy"
+# target_language = "no"  # French
+
+# translated_text = translate_text(text_to_translate, target_language)
+# print(f"Source text: {text_to_translate}")
+# print(f"Translation: {translated_text}")
