@@ -73,3 +73,44 @@
 # translated_text = translate_text(text_to_translate, target_language)
 # print(f"Source text: {text_to_translate}")
 # print(f"Translation: {translated_text}")
+import sys
+from PyQt5.QtWidgets import QApplication, QGraphicsBlurEffect, QGraphicsOpacityEffect, QGraphicsScene, QGraphicsView, QLabel, QGraphicsWidget
+
+class FrostedGlassWindow(QGraphicsView):
+    def __init__(self):
+        super().__init__()
+
+        # Set up the QGraphicsScene
+        scene = QGraphicsScene(self)
+        self.setScene(scene)
+
+        # Create a QGraphicsWidget for the frosted glass effect
+        frosted_widget = QGraphicsWidget()
+        frosted_widget.setGeometry(50, 50, 300, 200)
+
+        # Apply a blur effect to the QGraphicsWidget
+        blur_effect = QGraphicsBlurEffect()
+        blur_effect.setBlurRadius(10)
+        frosted_widget.setGraphicsEffect(blur_effect)
+
+        # Create a QLabel for the text
+        text_label = QLabel("Crystal Clear Text")
+        text_label.setStyleSheet("color: black; font-size: 16px; font-weight: bold;")
+
+        # Apply an opacity effect to the text label
+        opacity_effect = QGraphicsOpacityEffect()
+        opacity_effect.setOpacity(1.0)
+        text_label.setGraphicsEffect(opacity_effect)
+
+        # Add the text label to the frosted widget
+        frosted_widget.layout().addWidget(text_label)
+
+        # Add the frosted widget to the scene
+        scene.addItem(frosted_widget)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = FrostedGlassWindow()
+    window.setGeometry(100, 100, 400, 300)
+    window.show()
+    sys.exit(app.exec_())
