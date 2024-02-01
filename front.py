@@ -1,25 +1,24 @@
 import tkinter as tk
 from enum import Enum
 from ttkthemes import ThemedTk
+import configparser
+import os
 
-# focused=True
+opacity = 0.6
+offsetx = 250
+offsety = 350
+font = 8
 
-# def on_click(root):
-#     global focused
-#     focused = True
-#     check_focus(root)
-
-# def check_focus(root):
-#     global focused
-#     if root.focus_get() == root:
-#         focused = True
-#         root.after(1000, check_focus, root)
-#     else:
-#         focused = False
-
-# def update_overrideredirect(root):
-#     global focused
-#     root.overrideredirect(focused)
+def read_config():
+    global opacity, offsetx, offsety, font
+    config = configparser.ConfigParser()
+    # config.read(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.ini'))
+    config.read('config.ini')
+    opacity = float(config.get('settings', 'opacity'))
+    offsetx = int(config.get('settings', 'offsetx'))
+    offsety = int(config.get('settings', 'offsety'))
+    font = int(config.get('settings', 'font'))
+    return config
 
 def create_section(root, color, row, column, width, height, rowspan=1, columnspan=1):
     section = tk.Frame(root, bg=color, width=width, height=height)
@@ -27,24 +26,20 @@ def create_section(root, color, row, column, width, height, rowspan=1, columnspa
     return section
 
 def populate_section(frame, text):
-    label = tk.Label(frame, text=text,font=("Roboto", 8,"bold"), fg="white", background=frame['bg'], justify="left",wraplength=120)
+    label = tk.Label(frame, text=text,font=("Roboto", font,"bold"), fg="white", background=frame['bg'], justify="left",wraplength=120)
     label.pack(side=tk.LEFT)
     
 def generate_layout(name):
     root = ThemedTk(theme="equilux")
     root.title(name)
-    # update_overrideredirect(root)
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
-    
 
-# Set the initial position of the window to the lower left corner
-    root.geometry(f"+{screen_width-250}+{screen_height-300}")
+    root.geometry(f"+{screen_width-offsetx}+{screen_height-offsety}")
     root.resizable(False, False)
-    # root.attributes("-topmost", True)
-    root.attributes('-top', 1)  # Give it a lower "top" value
-    root.attributes('-alpha', 0.6)
-    # root.bind("<Button-1>",lambda event: on_click(root))
+    root.attributes('-top', 1)
+    root.attributes('-alpha', opacity)
+    
     sections = {
         'nouns': create_section(root, "black", 1, 0, 75, 75),
         'verbs': create_section(root, "black", 1, 1, 75, 75),
