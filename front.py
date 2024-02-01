@@ -3,11 +3,13 @@ from enum import Enum
 from ttkthemes import ThemedTk
 import configparser
 import os
+import time
 
 opacity = 0.6
 offsetx = 250
 offsety = 350
 font = 8
+
 
 def read_config():
     global opacity, offsetx, offsety, font
@@ -34,7 +36,12 @@ def generate_layout(name):
     root.title(name)
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
+    root.overrideredirect(True)  # Hide title bar initially
 
+# Bind the window to respond to click events
+    root.bind("<Button-1>", lambda event: root.overrideredirect(False))
+    root.bind("<FocusOut>", lambda event: root.after(100, lambda: root.overrideredirect(True) if not root.focus_get() else None))
+    
     root.geometry(f"+{screen_width-offsetx}+{screen_height-offsety}")
     root.resizable(False, False)
     root.attributes('-top', 1)
